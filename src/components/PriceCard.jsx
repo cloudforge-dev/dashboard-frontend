@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 export default function PriceCard({ name, data }) {
   if (!data) return null;
@@ -17,14 +17,16 @@ export default function PriceCard({ name, data }) {
             {name.toUpperCase()}
           </h3>
           <p className="text-3xl font-bold text-gray-900 mt-2">
-            ${price.toLocaleString('en-US', { maximumFractionDigits: 2 })}
+            ${price.toLocaleString("en-US", { maximumFractionDigits: 2 })}
           </p>
         </div>
-        
-        <div className={`text-2xl font-bold flex items-center ${isPositive ? 'text-green-500' : 'text-red-500'}`}>
-          <span className="text-3xl mr-1">
-            {isPositive ? '↑' : '↓'}
-          </span>
+
+        <div
+          className={`text-2xl font-bold flex items-center ${
+            isPositive ? "text-green-500" : "text-red-500"
+          }`}
+        >
+          <span className="text-3xl mr-1">{isPositive ? "↑" : "↓"}</span>
           {Math.abs(change24h).toFixed(2)}%
         </div>
       </div>
@@ -36,7 +38,7 @@ export default function PriceCard({ name, data }) {
             ${(marketCap / 1e9).toFixed(2)}B
           </p>
         </div>
-        
+
         <div>
           <p className="text-sm text-gray-500 mb-1">24h Volume</p>
           <p className="text-lg font-semibold text-gray-800">

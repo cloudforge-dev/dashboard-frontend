@@ -1,70 +1,193 @@
-# Getting Started with Create React App
+# Dashboard Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Real-time cryptocurrency price dashboard built with React and Socket.IO
 
-## Available Scripts
+## 🎯 Features
 
-In the project directory, you can run:
+- ✅ Real-time cryptocurrency price tracking
+- ✅ WebSocket connection for instant updates (5-second interval)
+- ✅ Beautiful responsive UI with TailwindCSS
+- ✅ Live connection status indicator
+- ✅ Real-time client count display
+- ✅ Automatic reconnection on disconnect
+- ✅ Loading states and error handling
+- ✅ Mobile-friendly design
 
-### `npm start`
+## 🛠 Tech Stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Framework**: React 18
+- **Styling**: TailwindCSS v3
+- **Real-time**: Socket.IO Client v4
+- **Build Tool**: Create React App
+- **Development**: Node.js v16+
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 📋 Prerequisites
 
-### `npm test`
+- Node.js v16.0.0 or higher
+- npm v8.0.0 or higher
+- Backend running on http://localhost:5000
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🚀 Quick Start
 
-### `npm run build`
+### 1. Installation
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+npm install
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 2. Environment Setup
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Create a `.env` file based on `.env.example`:
 
-### `npm run eject`
+```env
+REACT_APP_API_URL=http://localhost:5000
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### 3. Start Backend First
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+In another terminal:
+```bash
+cd ../dashboard-backend
+npm run dev
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### 4. Start Frontend
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```bash
+npm start
+```
 
-## Learn More
+Frontend will open on `http://localhost:3000`
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### 5. Production Build
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+npm run build
+```
 
-### Code Splitting
+## 🧩 Components
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Dashboard.jsx
+Main component handling:
+- Socket.IO WebSocket connection
+- Real-time data reception
+- Connection state management
+- Loading and error states
+- Grid layout of price cards
 
-### Analyzing the Bundle Size
+### PriceCard.jsx
+Individual crypto price display:
+- Cryptocurrency name and current price
+- 24-hour change percentage with color coding
+- Market capitalization
+- 24-hour trading volume
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## 📱 Responsive Design
 
-### Making a Progressive Web App
+- **Mobile** (< 640px): 1 column
+- **Tablet** (640px - 1024px): 2 columns
+- **Desktop** (> 1024px): 3 columns
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## 🔄 Data Flow
 
-### Advanced Configuration
+1. Component mounts → Establish WebSocket connection
+2. Server sends crypto data every 5 seconds
+3. Component receives data via Socket.IO events
+4. React re-renders with latest prices
+5. User sees real-time updates
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## 🎨 UI Features
 
-### Deployment
+- Gradient background (blue to indigo)
+- Card-based layout with shadows
+- Color-coded price changes (green ↑ for gains, red ↓ for losses)
+- Status indicator (green/yellow/red)
+- Real-time update timestamp
+- Loading spinner animation
+- Error message display
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## ⚙️ Environment Variables
 
-### `npm run build` fails to minify
+| Variable | Description | Example |
+|----------|-------------|---------|
+| REACT_APP_API_URL | Backend WebSocket URL | http://localhost:5000 |
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 🚨 Error Handling
+
+The app gracefully handles:
+- Connection failures
+- API errors
+- Network interruptions
+- Automatic reconnection (up to 5 attempts)
+
+## 🔗 Connection Status
+
+- **CONNECTING**: Attempting to connect (yellow)
+- **CONNECTED**: Successfully connected (green)
+- **DISCONNECTED**: Connection lost (red)
+- **ERROR**: Connection error occurred (red)
+
+## 📊 Supported Cryptocurrencies
+
+Displays real-time data for:
+1. Bitcoin (BTC)
+2. Ethereum (ETH)
+3. Cardano (ADA)
+4. Solana (SOL)
+5. Ripple (XRP)
+
+## 🐛 Troubleshooting
+
+### Backend not connecting
+1. Verify backend is running: `npm run dev` in dashboard-backend
+2. Check REACT_APP_API_URL in .env
+3. Ensure frontend URL is in backend CORS_ORIGIN
+
+### Styles not displaying
+1. Restart development server
+2. Clear browser cache (Ctrl+Shift+Delete)
+3. Verify tailwind.config.js content paths
+
+### Data not updating
+1. Check backend is fetching from CoinGecko
+2. Open Network tab (F12) to inspect WebSocket
+3. Check backend console for errors
+
+### Port conflicts
+```bash
+# Find process using port 3000 {#find-process-using-port-3000  data-source-line="752"}
+# Mac/Linux {#maclinux  data-source-line="753"}
+lsof -i :3000
+
+# Windows {#windows  data-source-line="756"}
+netstat -ano | findstr :3000
+``` {data-source-line="758"}
+
+## 📦 Available Scripts
+
+- `npm start` - Start development server
+- `npm run build` - Build for production
+- `npm test` - Run tests
+- `npm run eject` - Eject from CRA
+
+## 🚀 Deployment
+
+Ready for deployment on:
+- Vercel ✅ (Recommended)
+- Netlify ✅
+- GitHub Pages ✅
+- Firebase Hosting ✅
+
+## 📄 License
+
+ISC
+
+## 👤 Author
+
+CloudForge Dev Team
+
+---
+
+**Status**: Production Ready
+**Last Updated**: 2025-10-28
+**Requires**: Backend running on :5000
